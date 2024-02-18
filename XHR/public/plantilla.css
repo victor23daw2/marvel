@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@500&family=Roboto+Condensed&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #f0f0f0;
+}
+
+.navbar, .row2 {
+    background-color: #202020;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar img.marvel {
+    width: 130px;
+}
+
+.row2 ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+}
+
+.row2 li a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.row2 li a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para la sección de búsqueda */
+.busqueda {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.busqueda input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.busqueda button {
+    padding: 10px 20px;
+    background-color: #e62429;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Contenedor de cómics */
+#comicsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    margin: 20px auto;
+}
+
+#comicsContainer .comic {
+    width: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#comicsContainer .comic:hover {
+    transform: scale(1.1);
+}
+
+#comicsContainer .comic img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Detalles del cómic */
+#comicDetalls {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    position: fixed;
+    right: 10px; 
+    top: 100px; 
+    width: 300px; 
+    max-height: 90vh;
+    overflow-y: auto; 
+}
+
+#comicDetalls h3, #comicDetalls p {
+    margin: 10px 0;
+}
+
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+
+@media (max-width: 768px) {
+    #comicDetalls {
+        width: 80%;
+        left: 10%;
+        top: auto;
+        bottom: 10px;
+        position: fixed;
+    }
+}
