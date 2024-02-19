@@ -55,7 +55,7 @@ function md5(inputString) {
 }
 
 io.on('connection', (socket) => {
-    console.log('Un cliente se ha conectado');
+    console.log('conexió correcta');
 
     socket.on('buscarPersonaje', async (data) => {
         const ts = new Date().getTime();

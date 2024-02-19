@@ -19,7 +19,7 @@ window.onload=function(){
 
     function mostrarComics(comics) {
         const contenedorComics = document.getElementById('comicsContainer');
-        contenedorComics.innerHTML = ''; // neteja
+        contenedorComics.innerHTML = ''; // neteja els anteriors resultats
     
         comics.forEach(comic => {
             const elementoComic = document.createElement('div');
@@ -30,7 +30,7 @@ window.onload=function(){
             `;
             contenedorComics.appendChild(elementoComic);
     
-            if (elementoComic) { // comporoba si existeix, si no, pot donar error 
+            if (elementoComic) { // comproba si existeix, si no, pot donar error 
                 elementoComic.addEventListener('click', () => {
                     mostrarDetallesComic(comic);
                 });
