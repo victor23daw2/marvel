@@ -1,39 +1,44 @@
-window.onload = function(){
-    const socket = io.connect();
+window.onload=function(){
+    const socket = io.connect(window.location.origin);
 
-    // Referencia a elementos del DOM
-    const inputBusq = document.getElementById('inputBusq');
-    const botonBusq = document.getElementById('botonBusq');
-    const comicsContainer = document.getElementById('comicsContainer');
-
-    // Escucha del evento 'click' en el botón de búsqueda
-    botonBusq.addEventListener('click', function() {
-        const characterName = inputBusq.value.trim();
-        if (characterName) {
-            socket.emit('buscarPersonaje', { name: characterName });
+    document.getElementById('botonBusq').addEventListener('click', function() {
+        const nombrePersonaje = document.getElementById('inputBusq').value.trim();
+        if(nombrePersonaje) {
+            socket.emit('buscarPersonaje', { nombre: nombrePersonaje });
         }
     });
 
-    // Escucha de eventos emitidos por el servidor
-    socket.on('personajeEncontrado', function(data) {
-        mostrarComics(data.comics);
+    socket.on('resultadoBusqueda', function(comics) {
+        mostrarComics(comics);
     });
 
-    socket.on('errorBusqueda', function(mensaje) {
-        console.error(mensaje);
-        // Mostrar algún mensaje de error o realizar alguna acción
+    socket.on('errorBusqueda', function(error) {
+        console.error(error.message);
+        alert(error.message); 
     });
 
     function mostrarComics(comics) {
-        comicsContainer.innerHTML = ''; // Limpiar resultados anteriores
-        comics.forEach(function(comic) {
-            const comicElement = document.createElement('div');
-            comicElement.className = 'comic';
-            comicElement.innerHTML = `
+        const contenedorComics = document.getElementById('comicsContainer');
+        contenedorComics.innerHTML = ''; // neteja
+    
+        comics.forEach(comic => {
+            const elementoComic = document.createElement('div');
+            elementoComic.className = 'comic';
+            elementoComic.innerHTML = `
                 <img src="${comic.thumbnail.path}.${comic.thumbnail.extension}" alt="${comic.title}">
                 <p>${comic.title}</p>
             `;
-            comicsContainer.appendChild(comicElement);
+            contenedorComics.appendChild(elementoComic);
+    
+            if (elementoComic) { // comporoba si existeix, si no, pot donar error 
+                elementoComic.addEventListener('click', () => {
+                    mostrarDetallesComic(comic);
+                });
+            }
         });
+    }
+    function mostrarDetallesComic(comic) {
+        const comicDetalls = document.getElementById('comicDetalls');
+        comicDetalls.textContent = `Descripció el comic: ${comic.title}.${comic.description}`;
     }
 };
